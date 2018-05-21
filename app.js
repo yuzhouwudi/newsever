@@ -34,7 +34,7 @@ var app = express();
 
 app.use(bodyparse.json());
 app.use(bodyparse.urlencoded({extended:false}));
-app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin/login',login);
@@ -49,6 +49,10 @@ app.use('/index/home',home);
 app.use('/index/hot',hot);
 app.use('/index/new',news);
 
+
+app.get('/api/main',function (req,res) {
+    res.send([12,45,76])
+})
 
 app.use(function(req, res, next) {
   next(createError(404));
