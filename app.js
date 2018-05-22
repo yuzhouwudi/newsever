@@ -37,6 +37,15 @@ app.use(bodyparse.urlencoded({extended:false}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true,
+}));
+
+
+
 app.use('/api/admin/login',login);
 app.use('/api/admin/goods',goods);
 app.use('/api/admin/manager',manager);
@@ -48,6 +57,8 @@ app.use('/api/index/discount',discount);
 app.use('/api/index/home',home);
 app.use('/api/index/hot',hot);
 app.use('/api/index/new',news);
+
+
 
 
 app.get('/api/main',function (req,res) {
