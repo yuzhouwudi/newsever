@@ -37,17 +37,17 @@ app.use(bodyparse.urlencoded({extended:false}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin/login',login);
-app.use('/admin/goods',goods);
-app.use('/admin/manager',manager);
-app.use('/admin/user',user);
-app.use('/admin/order',order);
-app.use('/index/buycar',buycar);
-app.use('/index/classify',classify);
-app.use('/index/discount',discount);
-app.use('/index/home',home);
-app.use('/index/hot',hot);
-app.use('/index/new',news);
+app.use('/api/admin/login',login);
+app.use('/api/admin/goods',goods);
+app.use('/api/admin/manager',manager);
+app.use('/api/admin/user',user);
+app.use('/api/admin/order',order);
+app.use('/api/index/buycar',buycar);
+app.use('/api/index/classify',classify);
+app.use('/api/index/discount',discount);
+app.use('/api/index/home',home);
+app.use('/api/index/hot',hot);
+app.use('/api/index/new',news);
 
 
 app.get('/api/main',function (req,res) {
