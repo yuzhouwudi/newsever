@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var query=require('../../mysqls/pool')
 
 router.get('/', function(req, res, next) {
     if(!req.session.login){
@@ -15,11 +16,19 @@ router.get('/', function(req, res, next) {
 
 router.get('/clear', function(req, res, next) {
     if(req.session.login){
-        // delete req.session.user;
-        // req.session.login='no'
         res.send('edit')
     }
 
 });
+
+router.get('/display', function (req, res) {
+    query('select * from manager', function (err, sql) {
+        if (err) throw err
+        res.send(sql)
+    })
+})
+
+
+
 
 module.exports = router;

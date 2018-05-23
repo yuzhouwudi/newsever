@@ -1,12 +1,22 @@
-/**
- * Created by Administrator on 2018/5/21.
- */
 var express = require('express');
 var router = express.Router();
+var query=require('../../mysqls/pool')
+
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.send('index', { title: 'Express' });
+
+
+router.get('/display', function(req, res) {
+    query('select * from list',function (err,sql) {
+        res.send(sql)
+    })
 });
+
+router.get('/displaytwo', function(req, res) {
+    query('select * from listtwo',function (err,sql) {
+        res.send(sql)
+    })
+});
+
 
 module.exports = router;
