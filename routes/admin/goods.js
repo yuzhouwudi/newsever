@@ -6,8 +6,8 @@ var router = express.Router();
 var query=require('../../mysqls/pool')
 
 /* GET home page. */
-router.get('/display', function(req, res) {
-    query('select * from product',function (err,sql) {
+router.get('/nut', function(req, res) {
+    query('select * from product where fid=2',function (err,sql) {
         if(err) throw err;
         res.send(sql);
     })
