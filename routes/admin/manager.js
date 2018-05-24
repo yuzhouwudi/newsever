@@ -29,6 +29,13 @@ router.get('/display', function (req, res) {
 })
 
 
-
+router.post('/pass', function (req, res) {
+    let pass=req.body.pass
+    let id=req.body.id
+    query(`update manager set password='${pass}' where id=${id}`, function (err, sql) {
+        if (err) throw err
+        res.send(sql)
+    })
+})
 
 module.exports = router;
