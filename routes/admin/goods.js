@@ -41,7 +41,7 @@ router.post('/form', function (req, res) {
     img.forEach(val => {
         if (val.response) {
             let newpath = "/" + Date.now() + val.name
-            fs.renameSync(val.response, '/public' + newpath)
+            fs.renameSync(val.response, './public' + newpath)
             str.push({name: val.name, url: newpath})
         } else {
             str.push({name: val.name, url: val.url})
