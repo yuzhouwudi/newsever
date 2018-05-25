@@ -15,7 +15,19 @@ let upload = multer({
 // 坚果分类
 /* GET home page. */
 router.get('/nut', function (req, res) {
-    query('select * from product where fid=2', function (err, sql) {
+    let id=req.query.id
+    let nub=req.query.nub
+    let size=req.query.size
+    let n=(nub-1)*size
+    query(`select * from product where fid=${id} limit ${n},${size}`, function (err, sql) {
+        if (err) throw err;
+        res.send(sql);
+    })
+
+});
+router.get('/count', function (req, res) {
+    let id=req.query.id
+    query(`select count(*) as total from product where fid=${id}`, function (err, sql) {
         if (err) throw err;
         res.send(sql);
     })
@@ -28,6 +40,58 @@ router.get('/nutmod', function (req, res) {
         if (err) throw err;
         res.send(sql);
     })
+});
+
+
+
+
+router.get('/new', function (req, res) {
+    query('select * from product', function (err, sql) {
+        if (err) throw err;
+        let ridarr = []
+        sql.forEach(val => {
+            let rid = JSON.parse(val.rid)
+            let flag = rid.includes(1)
+            if (flag) {
+                ridarr.push(JSON.stringify(val))
+            }
+        })
+       res.send(ridarr)
+    })
+
+});
+
+router.get('/hot', function (req, res) {
+    query('select * from product', function (err, sql) {
+        if (err) throw err;
+        let ridarr = []
+        sql.forEach(val => {
+            let rid = JSON.parse(val.rid)
+            let flag = rid.includes(2)
+            if (flag) {
+                ridarr.push(JSON.stringify(val))
+            }
+        })
+        res.send(ridarr)
+    })
+
+});
+
+// rid数组循环
+router.get('/discount', function (req, res) {
+    query('select * from product', function (err, sql) {
+        if (err) throw err;
+        let ridarr = []
+        sql.forEach(val => {
+            let rid = JSON.parse(val.rid)
+            let flag = rid.includes(3)
+            if (flag) {
+                ridarr.push(JSON.stringify(val))
+            }
+        })
+        res.send(ridarr)
+    })
+
 });
 
 router.get('/del', function (req, res) {
@@ -59,7 +123,7 @@ function uploading(pic) {
                 fs.unlinkSync(val.response);
                 // 删除临时文件
             });
-            str.push({name: val.name, url: '/api/img'+newpath})
+            str.push({name: val.name, url: '/api/img' + newpath})
         } else {
             str.push({name: val.name, url: val.url})
         }

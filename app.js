@@ -35,6 +35,7 @@ var app = express();
 app.use(bodyparse.json());
 app.use(bodyparse.urlencoded({extended:false}));
 
+app.use(express.static(path.join(__dirname,'public')));
 app.use('/api',express.static(path.join(__dirname,'public')));
 
 
