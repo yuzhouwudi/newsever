@@ -19,6 +19,8 @@ var order=require('./routes/admin/order');
 var user=require('./routes/admin/user');
 // 购物车
 var buycar=require('./routes/index/buycar');
+
+var sign=require('./routes/index/sign')
 // 首页
 var home=require('./routes/index/home');
 //分类
@@ -29,6 +31,10 @@ var discount=require('./routes/index/discount');
 var hot=require('./routes/index/hot');
 //新品
 var news=require('./routes/index/new');
+
+var detail=require('./routes/index/detail');
+
+var person=require('./routes/index/person');
 
 var app = express();
 
@@ -52,6 +58,10 @@ app.use('/api/admin/goods',goods);
 app.use('/api/admin/manager',manager);
 app.use('/api/admin/user',user);
 app.use('/api/admin/order',order);
+
+app.use('/api/index/sign',sign);
+app.use('/api/index/person',person);
+app.use('/api/index/detail',detail);
 app.use('/api/index/buycar',buycar);
 app.use('/api/index/classify',classify);
 app.use('/api/index/discount',discount);
@@ -62,9 +72,7 @@ app.use('/api/index/new',news);
 
 
 
-app.get('/api/main',function (req,res) {
-    res.send([12,45,76])
-})
+
 
 app.use(function(req, res, next) {
   next(createError(404));

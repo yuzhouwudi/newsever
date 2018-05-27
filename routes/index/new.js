@@ -7,20 +7,46 @@ var query = require('../../mysqls/pool');
 
 /* GET home page. */
 router.get('/hot', function (req, res) {
+    let nub=req.query.nub
+    let size=req.query.size
+    let n=(nub-1)*size
     query('select * from product', function (err, sql) {
         if (err) throw err;
-        let ridarr = []
+        let ridarr = [];
         sql.forEach(val => {
-            let rid = JSON.parse(val.rid)
-            let flag = rid.includes(1)
+            let rid = JSON.parse(val.rid);
+            let flag = rid.includes(1);
             if (flag) {
                 ridarr.push(JSON.stringify(val))
             }
-        })
-        res.send(ridarr)
+        });
+        let arr=ridarr.slice(n,nub*size)
+        // console.log(ridarr.length);
+        res.send(arr)
     })
 
+
 });
+
+
+router.get('/count', function (req, res) {
+    query('select * from product', function (err, sql) {
+        if (err) throw err;
+        let ridarr = [];
+        sql.forEach(val => {
+            let rid = JSON.parse(val.rid);
+            let flag = rid.includes(1);
+            if (flag) {
+                ridarr.push(JSON.stringify(val))
+            }
+        });
+        let total=ridarr.length
+        // console.log(total);
+        res.send({ total: total })
+    })
+});
+
+
 
 router.get('/new', function (req, res) {
     let id=req.query.id

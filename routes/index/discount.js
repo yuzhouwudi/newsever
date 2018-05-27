@@ -6,7 +6,13 @@ var router = express.Router();
 var query = require('../../mysqls/pool')
 
 /* GET home page. */
+
+
+
 router.get('/discount', function (req, res) {
+    let nub=req.query.nub
+    let size=req.query.size
+    let n=(nub-1)*size
     query('select * from product', function (err, sql) {
         if (err) throw err;
         let ridarr = [];
@@ -17,14 +23,32 @@ router.get('/discount', function (req, res) {
                 ridarr.push(JSON.stringify(val))
             }
         });
-        res.send(ridarr)
+        let arr=ridarr.slice(n,nub*size)
+        // console.log(ridarr.length);
+        res.send(arr)
     })
+
 
 });
 
 
-// router.get('/', function(req, res, next) {
-//     res.send('index', { title: 'Express' });
-// });
+router.get('/count', function (req, res) {
+    query('select * from product', function (err, sql) {
+        if (err) throw err;
+        let ridarr = [];
+        sql.forEach(val => {
+            let rid = JSON.parse(val.rid);
+            let flag = rid.includes(2);
+            if (flag) {
+                ridarr.push(JSON.stringify(val))
+            }
+        });
+        let total=ridarr.length
+        // console.log(total);
+        res.send({ total: total })
+    })
+});
+
+
 
 module.exports = router;
