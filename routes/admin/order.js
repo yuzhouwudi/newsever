@@ -35,7 +35,6 @@ router.get('/find',function (req,res) {
     let id = req.query.id;
     query('select *  from product where id = '+id,function (err,sql) {
         if(err) throw err;
-
         res.send(sql)
     })
 });

@@ -39,6 +39,12 @@ router.get("/display", function(req, res) {
     })
 });
 
-
+router.get("/delbuycar", function(req, res) {
+    let id = req.query.id;
+    query('delete from buycar where id=' + id, function (err, sql) {
+        if (err) throw err;
+        res.send(sql);
+    })
+});
 
 module.exports = router;

@@ -2,8 +2,6 @@
  * Created by ow on 2018/4/28.
  */
 
-
-
 let mysql=require('mysql')
 const option={
     host:'localhost',

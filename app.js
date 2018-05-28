@@ -19,6 +19,7 @@ var order=require('./routes/admin/order');
 var user=require('./routes/admin/user');
 // 购物车
 var buycar=require('./routes/index/buycar');
+var list=require('./routes/index/list');
 
 var sign=require('./routes/index/sign')
 // 首页
@@ -63,6 +64,7 @@ app.use('/api/index/sign',sign);
 app.use('/api/index/person',person);
 app.use('/api/index/detail',detail);
 app.use('/api/index/buycar',buycar);
+app.use('/api/index/list',list);
 app.use('/api/index/classify',classify);
 app.use('/api/index/discount',discount);
 app.use('/api/index/home',home);
