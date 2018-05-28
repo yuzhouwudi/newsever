@@ -68,8 +68,8 @@ router.get("/find", function(req, res) {
 
 
 router.get("/display", function(req, res) {
-    let goodsid = req.query.goodsid;
-    query('select * from listtwo where dingdanid = '+goodsid,function (err,sql) {
+    let dingdanid = req.query.dingdanid;
+    query('select * from listtwo where dingdanid = '+dingdanid,function (err,sql) {
         if(err) throw err;
         res.send(sql)
     })
