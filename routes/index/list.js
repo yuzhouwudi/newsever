@@ -34,7 +34,6 @@ router.post("/addlist", function (req, res) {
         }
     })
 
-
 })
 
 router.get("/delbuycar", function (req, res) {
@@ -79,5 +78,34 @@ router.get("/product", function (req, res) {
         res.send(sql)
     })
 });
+
+
+
+
+router.get("/address", function (req, res) {
+    let id = req.query.id;
+    query('select * from address where uid = ' + id, function (err, sql) {
+        if (err) throw err;
+        res.send(sql)
+    })
+});
+
+router.get("/del", function (req, res) {
+    let id = req.query.id;
+    query('delete from address where id = ' + id, function (err, sql) {
+        if (err) throw err;
+        if(sql.affectedRows==1){
+            res.send('ok')
+        }  else{
+            res.send('error')
+        }
+    })
+});
+
+
+
+
+
+
 
 module.exports = router;
