@@ -49,6 +49,11 @@ router.get('/count', function (req, res) {
     })
 });
 
-
+router.get('/nut', function (req, res) {
+    query('select * from product limit 11,4', function (err, sql) {
+        if (err) throw err;
+        res.send(sql);
+    })
+});
 
 module.exports = router;

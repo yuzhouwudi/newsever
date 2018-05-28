@@ -19,8 +19,8 @@ router.get('/show', function (req, res) {
         if (err) throw err;
         res.send(sql);
     })
-
 });
+
 router.get('/count', function (req, res) {
     let id=req.query.id
     query(`select count(*) as total from product where fid=${id}`, function (err, sql) {
@@ -38,7 +38,12 @@ router.get('/list', function (req, res) {
 
 });
 
-
+router.get('/nut', function (req, res) {
+    query('select * from product limit 10,4', function (err, sql) {
+        if (err) throw err;
+        res.send(sql);
+    })
+});
 
 
 module.exports = router;

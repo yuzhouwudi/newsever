@@ -49,13 +49,23 @@ router.get('/count', function (req, res) {
 
 
 router.get('/new', function (req, res) {
-    let id=req.query.id
+    let id=req.query.id;
     query('select * from product where id='+id, function (err, sql) {
         if (err) throw err;
         res.send(sql);
     })
-
 });
+
+
+router.get('/nut', function (req, res) {
+    query('select * from product limit 19,4', function (err, sql) {
+        if (err) throw err;
+        res.send(sql);
+    })
+});
+
+
+
 
 
 

@@ -71,7 +71,12 @@ router.get("/display", function(req, res) {
     let dingdanid = req.query.dingdanid;
     query('select * from listtwo where dingdanid = '+dingdanid,function (err,sql) {
         if(err) throw err;
-        res.send(sql)
+       sql.forEach(val=>{
+           query('select * from product where id = '+val.goodsid,function (err,sql) {
+               if(err) throw err;
+               res.send(sql)
+           })
+       })
     })
 });
 
