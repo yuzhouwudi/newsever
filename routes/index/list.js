@@ -35,10 +35,9 @@ router.post("/addlist", function (req, res) {
     })
 
 
-
 })
 
-router.get("/delbuycar", function(req, res) {
+router.get("/delbuycar", function (req, res) {
     let id = req.query.id;
     query('delete from buycar where uid=' + id, function (err, sql) {
         if (err) throw err;
@@ -49,45 +48,36 @@ router.get("/delbuycar", function(req, res) {
 
 // 订单页展示
 
-router.get("/user", function(req, res) {
+router.get("/user", function (req, res) {
     let uid = req.query.uid;
-    query('select * from list where pid = '+uid,function (err,sql) {
-        if(err) throw err;
+    query('select * from list where pid = ' + uid, function (err, sql) {
+        if (err) throw err;
         res.send(sql)
     })
 });
 
-router.get("/find", function(req, res) {
+router.get("/find", function (req, res) {
     let dingdanid = req.query.dingdanid;
-    query('select * from listtwo where dingdanid = '+dingdanid,function (err,sql) {
-        if(err) throw err;
+    query('select * from listtwo where dingdanid = ' + dingdanid, function (err, sql) {
+        if (err) throw err;
         res.send(sql)
     })
 });
 
 
-
-router.get("/display", function(req, res) {
+router.get("/display", function (req, res) {
     let dingdanid = req.query.dingdanid;
-    query('select * from listtwo where dingdanid = '+dingdanid,function (err,sql) {
-        if(err) throw err;
-       sql.forEach(val=>{
-           query('select * from product where id = '+val.goodsid,function (err,sql) {
-               if(err) throw err;
-               res.send(sql)
-           })
-       })
+    query('select * from listtwo where dingdanid = ' + dingdanid, function (err, sql) {
+        if (err) throw err;
+        res.send(sql)
     })
 });
-
-
-
-
-
-
-
-
-
-
+router.get("/product", function (req, res) {
+    let id = req.query.id;
+    query('select * from product where id = ' + id, function (err, sql) {
+        if (err) throw err;
+        res.send(sql)
+    })
+});
 
 module.exports = router;
