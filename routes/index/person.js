@@ -57,7 +57,7 @@ router.post('/upd', function (req, res) {
     let body = req.body
     // console.log(req.body);
     let imgstr = uploading(body.img)
-    if(req.body.pass==''){
+    if(!req.body.pass){
         query(`update user set name='${body.name}',img='${imgstr}'
         where id=${id}`, function (err, data) {
             if (err) throw err
