@@ -37,6 +37,22 @@ router.post('/user', function (req, res) {
 
 });
 
+router.post('/enter', function (req, res) {
+    // console.log(req.body);
+    let phone=req.body.phone
+    let pass=req.body.pass
+    query(`insert into user (phone,password) values ('${phone}','${pass}')`, function (err, sql) {
+        if (err) throw err;
+        // console.log(result);
+        if(sql.affectedRows==1){
+            res.send('ok')
+        }else{
+            res.send('no')
+        }
+    })
+
+});
+
 
 
 module.exports = router;
